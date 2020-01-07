@@ -9,7 +9,6 @@
 		<email>jannik.glueckert@gmail.com</email>
 		<name>Jan-Niklas Glückert</name>
 	</owner>
-	<source type="git">git@github.com:Jannik2099/pinebookpro-overlay.git</source>
 	<source type="git">https://github.com/Jannik2099/pinebookpro-overlay.git</source>
 	</repo>
 </repositories>
