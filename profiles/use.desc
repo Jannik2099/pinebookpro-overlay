@@ -1,0 +1,2 @@
+performance_patches - patches that enable / set performance relevant stuff - you should check this for every affected package before enabling
+recommended_patches - patches that I recommend or deem necessary for everyday Pinebook Pro usage, or that are purely beneficial without risk of instability
