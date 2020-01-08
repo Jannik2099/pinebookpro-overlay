@@ -16,6 +16,7 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
+S="${WORKDIR}/ap6256-firmware-master"
 src_prepare() {
 	rm PKGBUILD
 	mkdir brcm
