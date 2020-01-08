@@ -24,7 +24,7 @@ src_prepare() {
 	cp BCM4345C5.hcd brcm/BCM.hcd
 	cp BCM4345C5.hcd brcm/BCM4345C5.hcd
 
-	cp nvram_ap6256.txt brcmfmac43456-sdio.pine64,pinebook-pro.txt
+	cp nvram_ap6256.txt brcm/brcmfmac43456-sdio.pine64,pinebook-pro.txt
 
 	mv fw_bcm43456c5_ag.bin brcm/brcmfmac43456-sdio.bin
 
