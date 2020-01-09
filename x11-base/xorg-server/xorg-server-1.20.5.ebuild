@@ -148,7 +148,7 @@ pkg_setup() {
 		$(use_enable kdrive)
 		$(use_enable unwind libunwind)
 		$(use_enable wayland xwayland)
-		$(usex wayland $(use_enable glamor) '--disable-glamor')
+		$(usex wayland $(use_enable glamor) '--enable-glamor')
 		$(use_enable !minimal record)
 		$(use_enable !minimal xfree86-utils)
 		$(use_enable !minimal dri)
