@@ -15,7 +15,7 @@ if [[ ${PV} != 9999* ]]; then
 fi
 
 IUSE_SERVERS="dmx kdrive wayland xephyr xnest xorg xvfb"
-IUSE="${IUSE_SERVERS} debug elogind ipv6 libressl libglvnd minimal selinux +suid systemd +udev unwind xcsecurity"
+IUSE="${IUSE_SERVERS} debug elogind ipv6 libressl libglvnd minimal selinux +suid systemd +udev unwind xcsecurity gles2"
 
 CDEPEND="libglvnd? (
 		media-libs/libglvnd
@@ -126,7 +126,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.12-unloadsubmodule.patch
 	# needed for new eselect-opengl, bug #541232
 	"${FILESDIR}"/${PN}-1.18-support-multiple-Files-sections.patch
-	"${FILESDIR}"/glamor-gles2.patch
 )
 
 pkg_setup() {
@@ -134,6 +133,13 @@ pkg_setup() {
 		ewarn "glamor is necessary for acceleration under Xwayland."
 		ewarn "Performance may be unacceptable without it."
 		ewarn "Build with USE=-minimal to enable glamor."
+	fi
+
+	if use gles2; then
+		ewarn "glamor gles2 is most likely partially broken"
+		PATCHES+=(
+			"${FILESDIR}"/glamor-gles2.patch
+		)
 	fi
 
 	# localstatedir is used for the log location; we need to override the default
