@@ -15,7 +15,7 @@ if [[ ${PV} != 9999* ]]; then
 fi
 
 IUSE_SERVERS="dmx kdrive wayland xephyr xnest xorg xvfb"
-IUSE="${IUSE_SERVERS} debug elogind ipv6 libressl libglvnd minimal selinux +suid systemd +udev unwind xcsecurity gles2"
+IUSE="${IUSE_SERVERS} debug elogind ipv6 libressl libglvnd minimal selinux +suid systemd +udev unwind xcsecurity glamor gles2"
 
 CDEPEND="libglvnd? (
 		media-libs/libglvnd
@@ -129,10 +129,8 @@ PATCHES=(
 )
 
 pkg_setup() {
-	if use wayland && use minimal; then
-		ewarn "glamor is necessary for acceleration under Xwayland."
-		ewarn "Performance may be unacceptable without it."
-		ewarn "Build with USE=-minimal to enable glamor."
+	if use wayland && use glamor; then
+		ewarn "glamor currently breaks xwayland applications"
 	fi
 
 	if use gles2; then
@@ -154,12 +152,12 @@ pkg_setup() {
 		$(use_enable kdrive)
 		$(use_enable unwind libunwind)
 		$(use_enable wayland xwayland)
+		$(usex wayland $(use_enable glamor) '--enable-glamor')
 		$(use_enable !minimal record)
 		$(use_enable !minimal xfree86-utils)
 		$(use_enable !minimal dri)
 		$(use_enable !minimal dri2)
 		$(use_enable !minimal dri3)
-		$(use_enable !minimal glamor)
 		$(use_enable !minimal glx)
 		$(use_enable xcsecurity)
 		$(use_enable xephyr)
