@@ -15,7 +15,7 @@ if [[ ${PV} != 9999* ]]; then
 fi
 
 IUSE_SERVERS="dmx kdrive wayland xephyr xnest xorg xvfb"
-IUSE="${IUSE_SERVERS} debug elogind ipv6 libressl libglvnd minimal selinux +suid systemd +udev unwind xcsecurity glamor gles2"
+IUSE="${IUSE_SERVERS} debug elogind ipv6 libressl libglvnd minimal selinux +suid systemd +udev unwind xcsecurity glamor"
 
 CDEPEND="libglvnd? (
 		media-libs/libglvnd
@@ -131,13 +131,6 @@ PATCHES=(
 pkg_setup() {
 	if use wayland && use glamor; then
 		ewarn "glamor currently breaks xwayland applications"
-	fi
-
-	if use gles2; then
-		ewarn "glamor gles2 is most likely partially broken"
-		PATCHES+=(
-			"${FILESDIR}"/glamor-gles2.patch
-		)
 	fi
 
 	# localstatedir is used for the log location; we need to override the default
