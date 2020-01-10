@@ -11,12 +11,12 @@ inherit kernel-2
 
 DESCRIPTION="Manjaro Kernel sources for the Pinebook Pro"
 HOMEPAGE="https://gitlab.manjaro.org/tsys/linux-pinebook-pro"
-SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/v5.5-rc4/linux-pinebook-pro-v5.5-rc4.tar.gz"
+SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/v5.5-rc5/linux-pinebook-pro-v5.5-rc5.tar.bz2"
 
 KEYWORDS="arm64"
 IUSE="performance_patches recommended_patches"
 
-S="${WORKDIR}/linux-pinebook-pro-v5.5-rc4"
+S="${WORKDIR}/linux-pinebook-pro-v5.5-rc5"
 
 src_unpack() {
 	unpack ${A}
