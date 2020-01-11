@@ -44,6 +44,7 @@ src_prepare() {
 
 src_install() {
 	doins -r *
+	chmod 755 usr/bin/hciattach
 }
 
 pkg_postinst() {
