@@ -3,20 +3,21 @@
 
 EAPI=7
 
+inherit git-r3
+
 DESCRIPTION="Firmware files for the Pinebook Pro that are not included in linux-firmware"
 HOMEPAGE="https://gitlab.manjaro.org/manjaro-arm/packages/community/ap6256-firmware"
-SRC_URI="https://gitlab.manjaro.org/manjaro-arm/packages/community/ap6256-firmware/-/archive/master/ap6256-firmware-master.tar.gz"
+EGIT_REPO_URI="https://gitlab.manjaro.org/manjaro-arm/packages/community/ap6256-firmware.git"
 
 LICENSE=""
 SLOT="0"
-KEYWORDS="arm64"
+KEYWORDS=""
 IUSE=""
 
 DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-S="${WORKDIR}/ap6256-firmware-master"
 src_prepare() {
 	rm PKGBUILD
 	mkdir brcm
