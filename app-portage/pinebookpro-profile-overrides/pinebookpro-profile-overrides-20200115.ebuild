@@ -25,6 +25,8 @@ src_prepare() {
 	mkdir -p "${DIR}"
 	cd "${DIR}"
 
+	cp "${FILESDIR}"/0000-update-profile-overrides.sh .
+
 	if use gles2; then
 		find "${FILESDIR}"/* | grep gles2 | xargs -I {} cp {} .
 	fi
