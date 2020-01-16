@@ -25,10 +25,6 @@ src_prepare() {
 	mkdir -p "${DIR}"
 	cd "${DIR}"
 
-	if ! test -f /etc/portage/repo.postsync.d/0000-update-profile-overrides.sh; then
-		cp "${FILESDIR}"/0000-update-profile-overrides.sh .
-	fi
-
 	if use gles2; then
 		find "${FILESDIR}"/* | grep gles2 | xargs -I {} cp {} .
 	fi
