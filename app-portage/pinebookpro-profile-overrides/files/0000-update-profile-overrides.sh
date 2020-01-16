@@ -1,3 +1,3 @@
 #!/bin/sh
 
-emerge -u app-portage/pinebookpro-profile-patches
+emerge -u app-portage/pinebookpro-profile-overrides
