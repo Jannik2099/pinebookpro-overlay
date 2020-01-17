@@ -20,19 +20,21 @@ src_unpack() {
 	mkdir "${PF}"
 }
 
-DIR="etc/portage/postsync.d"
+DIR="etc/portage/profile"
 src_prepare() {
 	mkdir -p "${DIR}"
 	cd "${DIR}"
-
-	cp "${FILESDIR}"/0000-update-profile-overrides.sh .
+	mkdir package.use.mask
+	mkdir use.mask
+	mkdir package.use.stable.mask
 
 	if use gles2; then
-		find "${FILESDIR}"/* | grep gles2 | xargs -I {} cp {} .
+		cp "${FILESDIR}"/gles2-global use.mask/gles2
+		cp "${FILESDIR}"/gles2-package package.use.mask/gles2
 	fi
 
 	if use wayland; then
-		find "${FILESDIR}"/* | grep wayland | xargs -I {} cp {} .
+		cp "${FILESDIR}"/wayland-package-stable package.use.stable.mask/wayland
 	fi
 
 	eapply_user
@@ -40,6 +42,5 @@ src_prepare() {
 
 src_install() {
 	doins -r *
-	find "${D}"/* | grep ".*\.sh" | xargs chmod 755
 }
 

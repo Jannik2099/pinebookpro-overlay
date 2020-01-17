@@ -1,0 +1,5 @@
+dev-libs/weston -pipewire
+kde-apps/krfb -wayland
+kde-plasma/xdg-desktop-portal-kde -screencast
+sys-apps/xdg-desktop-portal -screencast
+x11-wm/mutter -screencast
