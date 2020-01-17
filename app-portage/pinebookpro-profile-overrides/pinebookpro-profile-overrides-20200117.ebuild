@@ -37,10 +37,15 @@ src_prepare() {
 		cp "${FILESDIR}"/wayland-package-stable package.use.stable.mask/wayland
 	fi
 
+	mkdir ../repo.postsync.d
+	cd ../repo.postsync.d
+	cp "${FILESDIR}"/0000-update-profile-overrides.sh .
+
 	eapply_user
 }
 
 src_install() {
 	doins -r *
+	chmod 755 "${D}"/etc/portage/repo.postsync.d/0000-update-profile-overrides.sh
 }
 
