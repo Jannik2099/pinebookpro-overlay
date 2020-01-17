@@ -20,7 +20,7 @@ src_unpack() {
 	mkdir "${PF}"
 }
 
-DIR="etc/portage/repo.postsync.d"
+DIR="etc/portage/postsync.d"
 src_prepare() {
 	mkdir -p "${DIR}"
 	cd "${DIR}"
