@@ -1,0 +1,13 @@
+diff --git a/genkernel.conf b/genkernel.conf
+index c5d7052..1661089 100644
+--- a/genkernel.conf
++++ b/genkernel.conf
+@@ -237,7 +237,7 @@ NOCOLOR="false"
+ 
+ # Override default kernel binary path. See also the --kernel-binary
+ # command line option. Useful to install a uImage on arm.
+-#KERNEL_BINARY_OVERRIDE="arch/foo/boot/bar"
++KERNEL_BINARY_OVERRIDE="arch/arm64/boot/Image"
+ 
+ 
+ # =========GENKERNEL LOCATION CONFIGURATION============
