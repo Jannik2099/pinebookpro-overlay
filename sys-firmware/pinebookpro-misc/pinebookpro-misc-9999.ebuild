@@ -21,18 +21,6 @@ BDEPEND=""
 src_prepare() {
 	rm PKGBUILD
 
-	mkdir -p usr/bin
-	mv hciattach usr/bin/hciattach
-
-	if test -f /bin/systemctl; then
-		mkdir -p lib/systemd/system
-		mv sdio-hciattach.service lib/systemd/system/sdio-hciattach.service
-	else
-		rm sdio-hciattach.service
-		mkdir -p etc/init.d
-		cp ${FILESDIR}/sdio-hciattach etc/init.d/sdio-hciattach
-	fi
-
 	mkdir -p etc/udev/hwdb.d
 	mv 10-usb-kbd.hwdb etc/udev/hwdb.d/10-usb-kbd.hwdb
 
@@ -44,7 +32,6 @@ src_prepare() {
 
 src_install() {
 	doins -r *
-	chmod 755 usr/bin/hciattach
 }
 
 pkg_postinst() {
