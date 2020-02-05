@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://git.eno.space/pbp-uboot.git"
 EGIT_BRANCH="nvme"
 EGIT_COMMIT="908d441fefc2203affe1bb0d79f75f611888fc1f"
 
-LICENSE="GPL2"
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm64"
 IUSE="build-atf savedconfig"
