@@ -17,6 +17,7 @@ KEYWORDS="~arm64"
 IUSE="build-atf savedconfig"
 
 DEPEND="
+	sys-apps/dtc
 	!build-atf? ( sys-firmware/arm-trusted-firmware-bin )
 	build-atf? ( sys-firmware/arm-trusted-firmware )
 "
