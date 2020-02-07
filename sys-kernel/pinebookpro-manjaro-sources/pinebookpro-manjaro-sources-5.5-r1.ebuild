@@ -7,7 +7,7 @@ K_USEPV="yes"
 ETYPE="sources"
 
 inherit kernel-2
-commit="d71a774aee61d67970d53077ef59be29035b1c90"
+commit="66d7a788eda490a15e64ddf3ebdff4b5f2f1b60f"
 
 DESCRIPTION="Manjaro Kernel sources for the Pinebook Pro"
 HOMEPAGE="https://gitlab.manjaro.org/tsys/linux-pinebook-pro"
@@ -16,27 +16,25 @@ SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/${commit}/
 KEYWORDS="~arm64"
 IUSE="performance-patches recommended-patches"
 
-S="${WORKDIR}/linux-pinebook-pro-${PV}"
+S="${WORKDIR}/linux-pinebook-pro-${PVR}"
 
 src_unpack() {
 	unpack ${A}
-	mv ${WORKDIR}/linux-pinebook-pro-${commit} ${WORKDIR}/linux-pinebook-pro-${PV}
+	mv ${WORKDIR}/linux-pinebook-pro-${commit} ${WORKDIR}/linux-pinebook-pro-${PVR} || die
 }
 
 src_prepare() {
 	if use performance-patches; then
-		eapply ${FILESDIR}/performance-patches/*.patch
+		eapply ${FILESDIR}/performance-patches/*.patch || die
 	fi
 
 	if use recommended-patches; then
-		eapply ${FILESDIR}/recommended-patches/*.patch
+		eapply ${FILESDIR}/recommended-patches/*.patch || die
 	fi
 
 	eapply_user
 }
 
 src_configure() {
-	if ! test -f ${S}/.config; then
-		cp ${FILESDIR}/default-config ${S}/.config
-	fi
+	cp ${FILESDIR}/default-config ${S}/.config
 }
