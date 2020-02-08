@@ -9,7 +9,7 @@ DESCRIPTION="Uboot"
 HOMEPAGE=""
 EGIT_REPO_URI="https://git.eno.space/pbp-uboot.git"
 EGIT_BRANCH="master"
-EGIT_COMMIT="3d3dbebfe8726cf2ae51ed44dc49bbc497d62ac5"
+EGIT_COMMIT="365495a329c8e92ca4c134562d091df71b75845e"
 
 LICENSE="GPL-2"
 SLOT="0"
