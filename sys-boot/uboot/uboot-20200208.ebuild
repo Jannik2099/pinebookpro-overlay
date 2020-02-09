@@ -8,8 +8,8 @@ inherit git-r3
 DESCRIPTION="Uboot"
 HOMEPAGE=""
 EGIT_REPO_URI="https://git.eno.space/pbp-uboot.git"
-EGIT_BRANCH="nvme"
-EGIT_COMMIT="908d441fefc2203affe1bb0d79f75f611888fc1f"
+EGIT_BRANCH="master"
+EGIT_COMMIT="365495a329c8e92ca4c134562d091df71b75845e"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,8 +24,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-
-
 src_configure() {
 	if use savedconfig; then
 		cp /etc/portage/sys-boot/uboot/uboot.config ${S}/.config || die "could not find uboot.config"
@@ -33,6 +31,7 @@ src_configure() {
 		emake pinebook_pro-rk3399_defconfig || die
 	fi
 }
+
 src_compile() {
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
 	emake BL31=/usr/share/arm-trusted-firmware/build/rk3399/release/bl31/bl31.elf || die
@@ -40,12 +39,14 @@ src_compile() {
 
 src_install() {
 	insinto /usr/share/uboot
-	doins idbloader.img
-	doins u-boot.itb
+	doins idbloader.img || die
+	doins u-boot.itb || die
 
-	cp .config uboot.config
-	insinto /etc/portage/savedconfig/sys-boot/uboot
-	doins uboot.config
+	if ! use savedconfig; then
+		cp .config uboot.config
+		insinto /etc/portage/savedconfig/sys-boot/uboot
+		doins uboot.config || die
+	fi
 }
 
 pkg_postinst() {
