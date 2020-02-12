@@ -7,7 +7,7 @@ K_USEPV="yes"
 ETYPE="sources"
 
 inherit kernel-2
-commit="66d7a788eda490a15e64ddf3ebdff4b5f2f1b60f"
+commit="799b9141e48783a0844187ad00855b3d53f77998"
 
 DESCRIPTION="Manjaro Kernel sources for the Pinebook Pro"
 HOMEPAGE="https://gitlab.manjaro.org/tsys/linux-pinebook-pro"
