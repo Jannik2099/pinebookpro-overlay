@@ -5,7 +5,7 @@ EAPI=7
 
 DESCRIPTION="Extlinux script for the PinebookPro"
 HOMEPAGE=""
-SRC_URI="https://github.com/Jannik2099/u-boot-menu/archive/gentoo/v${PVR}.tar.gz"
+SRC_URI="https://github.com/Jannik2099/u-boot-menu/archive/gentoo/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -16,11 +16,11 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
-S="${WORKDIR}/extlinux-${PVR}"
+S="${WORKDIR}/extlinux-${PV}"
 
 src_unpack() {
 unpack ${A}
-mv ${WORKDIR}/u-boot-menu-gentoo-v${PVR} ${WORKDIR}/extlinux-${PVR} || die
+mv ${WORKDIR}/u-boot-menu-gentoo-v${PV} ${WORKDIR}/extlinux-${PV} || die
 }
 
 src_prepare() {
