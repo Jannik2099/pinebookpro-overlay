@@ -70,6 +70,7 @@ COMMON_URI="
 
 if [[ ${PV} == 9999* ]] ; then
 	EGIT_REPO_URI="https://github.com/Jannik2099/genkernel.git"
+	EGIT_BRANCH="dev"
 	inherit git-r3
 	S="${WORKDIR}/${P}"
 	SRC_URI="${COMMON_URI}"
