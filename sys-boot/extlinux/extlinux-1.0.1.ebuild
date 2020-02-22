@@ -9,7 +9,7 @@ SRC_URI="https://github.com/Jannik2099/u-boot-menu/archive/gentoo/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~arm64"
+KEYWORDS="**"
 IUSE=""
 
 DEPEND=""
