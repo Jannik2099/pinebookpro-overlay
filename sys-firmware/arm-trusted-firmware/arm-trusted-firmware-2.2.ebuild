@@ -4,10 +4,10 @@
 EAPI=7
 
 DESCRIPTION="ATF"
-HOMEPAGE=""
+HOMEPAGE="https://developer.trustedfirmware.org/dashboard/view/6/"
 SRC_URI="https://github.com/ARM-software/${PN}/archive/v${PV}.tar.gz"
 
-LICENSE=""
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="arm64"
 IUSE=""
@@ -15,7 +15,6 @@ IUSE=""
 DEPEND=""
 RDEPEND="${DEPEND} !sys-firmware/arm-trusted-firmware-bin"
 BDEPEND=""
-
 
 src_compile() {
 	which arm-none-eabi-gcc || die "arm-none-eabi toolchain not found!"

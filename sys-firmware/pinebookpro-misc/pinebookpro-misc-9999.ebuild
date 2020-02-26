@@ -9,7 +9,7 @@ DESCRIPTION="Miscellaneous files and fixes for full Pinebook Pro functionality"
 HOMEPAGE="https://gitlab.manjaro.org/manjaro-arm/packages/community/pinebookpro-post-install"
 EGIT_REPO_URI="https://gitlab.manjaro.org/manjaro-arm/packages/community/pinebookpro-post-install.git"
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 IUSE=""

@@ -7,7 +7,7 @@ DESCRIPTION="profile overrides for the Pinebook Pro"
 HOMEPAGE="https://github.com/Jannik2099/pinebookpro-overlay/"
 SRC_URI=""
 
-LICENSE=""
+LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="arm64"
 IUSE="gles2 wayland"
@@ -48,4 +48,3 @@ src_install() {
 	doins -r *
 	chmod 755 "${D}"/etc/portage/repo.postsync.d/0000-update-profile-overrides.sh
 }
-

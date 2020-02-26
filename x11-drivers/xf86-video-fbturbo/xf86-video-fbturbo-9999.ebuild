@@ -5,11 +5,11 @@ EAPI=7
 
 inherit git-r3
 
-DESCRIPTION=""
+DESCRIPTION=" Xorg DDX driver for ARM devices"
 HOMEPAGE="https://github.com/ssvb/xf86-video-fbturbo"
 EGIT_REPO_URI="https://github.com/ssvb/xf86-video-fbturbo.git"
 
-LICENSE=""
+LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE=""

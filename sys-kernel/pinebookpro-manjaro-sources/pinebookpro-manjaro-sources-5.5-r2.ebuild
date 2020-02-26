@@ -11,30 +11,30 @@ commit="799b9141e48783a0844187ad00855b3d53f77998"
 
 DESCRIPTION="Manjaro Kernel sources for the Pinebook Pro"
 HOMEPAGE="https://gitlab.manjaro.org/tsys/linux-pinebook-pro"
-SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/${commit}/linux-pinebook-pro-${commit}.tar.bz2"
+SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/${commit}/linux-pinebook-pro-${commit}.tar.bz2 -> ${P}.tar.bz2"
 
 KEYWORDS="~arm64"
 IUSE="performance-patches recommended-patches"
 
-S="${WORKDIR}/linux-pinebook-pro-${PVR}"
+S="${WORKDIR}"/linux-pinebook-pro-"${PVR}"
 
 src_unpack() {
-	unpack ${A}
-	mv ${WORKDIR}/linux-pinebook-pro-${commit} ${WORKDIR}/linux-pinebook-pro-${PVR} || die
+	unpack "${P}".tar.bz2
+	mv "${WORKDIR}"/linux-pinebook-pro-"${commit}" "${S}"
 }
 
 src_prepare() {
 	if use performance-patches; then
-		eapply ${FILESDIR}/performance-patches/*.patch || die
+		eapply "${FILESDIR}"/performance-patches/*.patch || die
 	fi
 
 	if use recommended-patches; then
-		eapply ${FILESDIR}/recommended-patches/*.patch || die
+		eapply "${FILESDIR}"/recommended-patches/*.patch || die
 	fi
 
 	eapply_user
 }
 
 src_configure() {
-	cp ${FILESDIR}/default-config ${S}/.config
+	cp "${FILESDIR}"/default-config "${S}"/.config
 }

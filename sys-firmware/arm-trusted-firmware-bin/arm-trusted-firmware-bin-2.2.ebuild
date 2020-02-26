@@ -3,11 +3,11 @@
 
 EAPI=7
 
-DESCRIPTION=""
-HOMEPAGE=""
+DESCRIPTION="RK3399 ATF Binary"
+HOMEPAGE="https://developer.trustedfirmware.org/dashboard/view/6/"
 SRC_URI=""
 
-LICENSE=""
+LICENSE="BSD"
 SLOT="0"
 KEYWORDS="arm64"
 IUSE=""
@@ -16,10 +16,10 @@ DEPEND=""
 RDEPEND="${DEPEND} !sys-firmware/arm-trusted-firmware"
 BDEPEND=""
 
-S=${WORKDIR}
+S="${WORKDIR}"
 
 src_unpack() {
-	cp ${FILESDIR}/bl31.elf ${WORKDIR}/bl31.elf
+	cp "${FILESDIR}"/bl31.elf "${WORKDIR}"/bl31.elf
 }
 
 src_install() {

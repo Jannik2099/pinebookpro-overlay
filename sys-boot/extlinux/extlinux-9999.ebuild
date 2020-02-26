@@ -6,7 +6,7 @@ EAPI=7
 inherit git-r3
 
 DESCRIPTION="Extlinux script for the PinebookPro"
-HOMEPAGE=""
+HOMEPAGE="https://wiki.gentoo.org/wiki/No_homepage"
 EGIT_REPO_URI="https://github.com/Jannik2099/u-boot-menu.git"
 EGIT_BRANCH="master"
 EGIT_COMMIT="HEAD"
