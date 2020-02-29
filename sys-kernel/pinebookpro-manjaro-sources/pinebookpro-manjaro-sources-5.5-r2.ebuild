@@ -11,7 +11,7 @@ commit="799b9141e48783a0844187ad00855b3d53f77998"
 
 DESCRIPTION="Manjaro Kernel sources for the Pinebook Pro"
 HOMEPAGE="https://gitlab.manjaro.org/tsys/linux-pinebook-pro"
-SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/${commit}/linux-pinebook-pro-${commit}.tar.bz2 -> ${P}.tar.bz2"
+SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/${commit}/linux-pinebook-pro-${commit}.tar.bz2 -> ${PF}.tar.bz2"
 
 KEYWORDS="~arm64"
 IUSE="performance-patches recommended-patches"
@@ -19,7 +19,7 @@ IUSE="performance-patches recommended-patches"
 S="${WORKDIR}"/linux-pinebook-pro-"${PVR}"
 
 src_unpack() {
-	unpack "${P}".tar.bz2
+	unpack "${PF}".tar.bz2
 	mv "${WORKDIR}"/linux-pinebook-pro-"${commit}" "${S}"
 }
 
