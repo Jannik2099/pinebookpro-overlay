@@ -5,7 +5,7 @@ EAPI=7
 
 DESCRIPTION="ATF"
 HOMEPAGE="https://developer.trustedfirmware.org/dashboard/view/6/"
-SRC_URI="https://github.com/ARM-software/${PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/ARM-software/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
