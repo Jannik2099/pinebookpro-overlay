@@ -74,7 +74,7 @@ if [[ ${PV} == 9999* ]] ; then
 	S="${WORKDIR}/${P}"
 	SRC_URI="${COMMON_URI}"
 else
-	SRC_URI="https://github.com/Jannik2099/genkernel/archive/v${PV}.tar.gz
+	SRC_URI="https://github.com/Jannik2099/genkernel/archive/v${PV}.tar.gz -> ${P}.tar.gz
 		${COMMON_URI}"
 	KEYWORDS="~alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86"
 fi
@@ -113,7 +113,12 @@ src_unpack() {
 	if [[ ${PV} == 9999* ]]; then
 		git-r3_src_unpack
 	else
-		unpack "v${PV}.tar.gz"
+		local gk_src_file
+		for gk_src_file in ${A} ; do
+			if [[ ${gk_src_file} == genkernel-* ]] ; then
+				unpack "${gk_src_file}"
+			fi
+		done
 	fi
 }
 
