@@ -6,22 +6,19 @@ EAPI=6
 K_USEPV="yes"
 ETYPE="sources"
 
-inherit kernel-2
-commit="799b9141e48783a0844187ad00855b3d53f77998"
+inherit kernel-2 git-r3
 
 DESCRIPTION="Manjaro Kernel sources for the Pinebook Pro"
 HOMEPAGE="https://gitlab.manjaro.org/tsys/linux-pinebook-pro"
-SRC_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro/-/archive/${commit}/linux-pinebook-pro-${commit}.tar.bz2 -> ${PF}.tar.bz2"
+EGIT_REPO_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro.git"
+EGIT_REPO_BRANCH="v5.5"
+EGIT_REPO_COMMIT="9564c96de3d1e7a19fbfed075333bf414fa1749f"
+EGIT_CHECKOUT_DIR="linux-pinebook-pro-${PVR}"
 
 KEYWORDS="~arm64"
 IUSE="performance-patches recommended-patches"
 
 S="${WORKDIR}"/linux-pinebook-pro-"${PVR}"
-
-src_unpack() {
-	unpack "${PF}".tar.bz2
-	mv "${WORKDIR}"/linux-pinebook-pro-"${commit}" "${S}"
-}
 
 src_prepare() {
 	if use performance-patches; then
