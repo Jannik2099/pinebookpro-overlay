@@ -76,7 +76,7 @@ if [[ ${PV} == 9999* ]] ; then
 else
 	SRC_URI="https://github.com/Jannik2099/genkernel/archive/v${PV}.tar.gz -> ${P}.tar.gz
 		${COMMON_URI}"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+	KEYWORDS="~alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86"
 fi
 
 DESCRIPTION="Gentoo automatic kernel building scripts"
