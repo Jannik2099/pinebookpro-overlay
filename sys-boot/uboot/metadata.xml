@@ -7,5 +7,6 @@
 	</maintainer>
 	<use>
 		<flag name="build-atf">Build the ATF yourself - this requires an arm-none-eabi toolchain!</flag>
+		<flag name="nvme">Enable Uboot to read from nvme - this is a different branch!</flag>
 	</use>
 </pkgmetadata>

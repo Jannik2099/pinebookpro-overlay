@@ -7,14 +7,16 @@ inherit git-r3
 
 DESCRIPTION="Uboot"
 HOMEPAGE="https://www.denx.de/wiki/U-Boot"
+
 EGIT_REPO_URI="https://git.eno.space/pbp-uboot.git"
 EGIT_BRANCH="master"
 EGIT_COMMIT="365495a329c8e92ca4c134562d091df71b75845e"
+EGIT_MIN_CLONE_TYPE="mirror"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~arm64"
-IUSE="build-atf savedconfig"
+IUSE="build-atf savedconfig nvme"
 
 DEPEND="
 	sys-apps/dtc
@@ -25,6 +27,10 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_configure() {
+	if use nvme; then
+		git checkout nvme || die
+	fi
+
 	if use savedconfig; then
 		cp /etc/portage/sys-boot/uboot/uboot.config "${S}"/.config || die "could not find uboot.config"
 	else
