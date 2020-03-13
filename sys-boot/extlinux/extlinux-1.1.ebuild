@@ -15,7 +15,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="arm64"
 IUSE=""
 
 DEPEND=""
