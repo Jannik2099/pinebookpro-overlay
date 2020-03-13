@@ -23,7 +23,7 @@ BDEPEND=""
 src_install() {
 dobin u-boot-update
 doman u-boot-update.8
-if [ ! test -f /etc/default/u-boot ]; then
+if ! test -f /etc/default/u-boot; then
 	insinto /etc/default
 	newins default u-boot
 fi
