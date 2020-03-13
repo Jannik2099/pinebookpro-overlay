@@ -13,10 +13,11 @@ inherit bash-completion-r1
 VERSION_BOOST="1.72.0"
 VERSION_BTRFS_PROGS="5.4.1"
 VERSION_BUSYBOX="1.31.1"
-VERSION_CRYPTSETUP="2.2.2"
+VERSION_COREUTILS="8.32"
+VERSION_CRYPTSETUP="2.3.0"
 VERSION_DMRAID="1.0.0.rc16-3"
 VERSION_DROPBEAR="2019.78"
-VERSION_EXPAT="2.2.8"
+VERSION_EXPAT="2.2.9"
 VERSION_E2FSPROGS="1.45.5"
 VERSION_FUSE="2.9.9"
 VERSION_GPG="1.4.23"
@@ -33,7 +34,7 @@ VERSION_POPT="1.16"
 VERSION_STRACE="5.4"
 VERSION_THIN_PROVISIONING_TOOLS="0.8.5"
 VERSION_UNIONFS_FUSE="2.0"
-VERSION_UTIL_LINUX="2.34"
+VERSION_UTIL_LINUX="2.35.1"
 VERSION_XFSPROGS="5.4.0"
 VERSION_ZLIB="1.2.11"
 VERSION_ZSTD="1.4.4"
@@ -42,6 +43,7 @@ COMMON_URI="
 	https://dl.bintray.com/boostorg/release/${VERSION_BOOST}/source/boost_${VERSION_BOOST//./_}.tar.bz2
 	https://www.kernel.org/pub/linux/kernel/people/kdave/btrfs-progs/btrfs-progs-v${VERSION_BTRFS_PROGS}.tar.xz
 	https://www.busybox.net/downloads/busybox-${VERSION_BUSYBOX}.tar.bz2
+	mirror://gnu/coreutils/coreutils-${VERSION_COREUTILS}.tar.xz
 	https://www.kernel.org/pub/linux/utils/cryptsetup/v$(ver_cut 1-2 ${VERSION_CRYPTSETUP})/cryptsetup-${VERSION_CRYPTSETUP}.tar.xz
 	https://people.redhat.com/~heinzm/sw/dmraid/src/dmraid-${VERSION_DMRAID}.tar.bz2
 	https://matt.ucc.asn.au/dropbear/releases/dropbear-${VERSION_DROPBEAR}.tar.bz2
@@ -69,12 +71,12 @@ COMMON_URI="
 "
 
 if [[ ${PV} == 9999* ]] ; then
-	EGIT_REPO_URI="https://github.com/Jannik2099/genkernel.git"
+	EGIT_REPO_URI="https://anongit.gentoo.org/git/proj/${PN}.git"
 	inherit git-r3
 	S="${WORKDIR}/${P}"
 	SRC_URI="${COMMON_URI}"
 else
-	SRC_URI="https://github.com/Jannik2099/genkernel/archive/v${PV}.tar.gz -> ${P}.tar.gz
+	SRC_URI="https://github.com/Jannik2099/genkernel/archive/v${PV}-u-boot.tar.gz -> ${P}.tar.gz
 		${COMMON_URI}"
 	KEYWORDS="~alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86"
 fi
@@ -105,9 +107,9 @@ RDEPEND="${DEPEND}
 	virtual/pkgconfig
 	firmware? ( sys-kernel/linux-firmware )"
 
-if [[ ${PV} == 9999* ]]; then
+#if [[ ${PV} == 9999* ]]; then
 	DEPEND="${DEPEND} app-text/asciidoc"
-fi
+#fi
 
 src_unpack() {
 	if [[ ${PV} == 9999* ]]; then
@@ -117,6 +119,7 @@ src_unpack() {
 		for gk_src_file in ${A} ; do
 			if [[ ${gk_src_file} == genkernel-* ]] ; then
 				unpack "${gk_src_file}"
+				mv ${WORKDIR}/${P}* ${WORKDIR}/${P}
 			fi
 		done
 	fi
@@ -129,6 +132,10 @@ src_prepare() {
 		einfo "Updating version tag"
 		GK_V="$(git describe --tags | sed 's:^v::')-git"
 		sed "/^GK_V/s,=.*,='${GK_V}',g" -i "${S}"/genkernel
+		einfo "Producing ChangeLog from Git history..."
+		pushd "${S}/.git" >/dev/null || die
+		git log > "${S}"/ChangeLog || die
+		popd >/dev/null || die
 	fi
 
 	# Update software.sh
@@ -136,6 +143,7 @@ src_prepare() {
 		-e "s:VERSION_BOOST:${VERSION_BOOST}:"\
 		-e "s:VERSION_BTRFS_PROGS:${VERSION_BTRFS_PROGS}:"\
 		-e "s:VERSION_BUSYBOX:${VERSION_BUSYBOX}:"\
+		-e "s:VERSION_COREUTILS:${VERSION_COREUTILS}:"\
 		-e "s:VERSION_CRYPTSETUP:${VERSION_CRYPTSETUP}:"\
 		-e "s:VERSION_DMRAID:${VERSION_DMRAID}:"\
 		-e "s:VERSION_DROPBEAR:${VERSION_DROPBEAR}:"\
@@ -182,7 +190,7 @@ src_install() {
 	doman genkernel.8
 	dodoc AUTHORS README TODO
 	dobin genkernel
-	rm -f genkernel genkernel.8 AUTHORS README TODO genkernel.conf
+	rm -f genkernel genkernel.8 AUTHORS ChangeLog README TODO genkernel.conf
 
 	if use ibm ; then
 		cp "${S}"/arch/ppc64/kernel-2.6{-pSeries,} || die
