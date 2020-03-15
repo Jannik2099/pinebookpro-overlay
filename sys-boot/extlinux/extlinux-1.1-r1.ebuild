@@ -22,6 +22,8 @@ DEPEND=""
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
+S="${WORKDIR}/u-boot-menu-${PV}"
+
 src_install() {
 dobin u-boot-update
 doman u-boot-update.8
