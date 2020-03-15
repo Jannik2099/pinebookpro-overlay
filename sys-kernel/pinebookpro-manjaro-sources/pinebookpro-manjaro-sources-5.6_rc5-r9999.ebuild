@@ -21,8 +21,6 @@ IUSE="performance-patches recommended-patches"
 S="${WORKDIR}"/linux-pinebook-pro-"${PVR}"
 
 pkg_pretend() {
-	default
-
 	ewarn 'This is a live ebuild, it follows git HEAD of the Tsys kernel repo'
 	ewarn 'Regardless, I will always rename this to the newest rc so it triggers an update on your side'
 	ewarn 'It is not possible to preserver previous rcs because Tsys rebases the branch, losing commit history'
