@@ -8,11 +8,11 @@ inherit git-r3
 DESCRIPTION="Firmware files for the Pinebook Pro that are not included in linux-firmware"
 HOMEPAGE="https://gitlab.manjaro.org/manjaro-arm/packages/community/ap6256-firmware"
 EGIT_REPO_URI="https://gitlab.manjaro.org/manjaro-arm/packages/community/ap6256-firmware.git"
-EGIT_BRANCH="a30bf312b268eab42d38fab0cc3ed3177895ff5d"
+EGIT_COMMIT="a30bf312b268eab42d38fab0cc3ed3177895ff5d"
 
 LICENSE="Broadcom"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="arm64"
 IUSE=""
 
 DEPEND=""
@@ -37,6 +37,5 @@ src_prepare() {
 
 src_install() {
 	insinto /lib/firmware
-	insopts -Dm644
 	doins -r *
 }
