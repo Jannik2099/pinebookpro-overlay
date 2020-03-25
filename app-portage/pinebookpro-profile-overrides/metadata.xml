@@ -5,7 +5,4 @@
 		<email>jannik.glueckert@gmail.com</email>
 		<name>Jannik Glückert</name>
 	</maintainer>
-	<use>
-		<flag name="gles2">Use gles2 where applicable</flag>	
-	</use>
 </pkgmetadata>
