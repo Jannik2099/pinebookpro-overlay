@@ -1,0 +1,203 @@
+diff --git a/doc/genkernel.8.txt b/doc/genkernel.8.txt
+index 7cd65fe..ac01d89 100644
+--- a/doc/genkernel.8.txt
++++ b/doc/genkernel.8.txt
+@@ -56,6 +56,10 @@ actions are supported:
+     Build only the kernel and the modules.
+ *ramdisk*::
+     Build only the ramdisk/initramfs.
++*fdt*::
++    Build only the fdt/dtb.
++*dtb*::
++    Build only the fdt/dtb.
+ 
+ 
+ OPTIONS
+@@ -404,8 +408,8 @@ system is able to load multiple initramfs.
+     font early on boot. See *gk.bootfont.disabled* kernel parameter for
+     disabling that feature at runtime.
+ 
+-*--bootloader*=<grub|grub2>::
+-    Add new kernel to GRUB or GRUB2 configuration.
++*--bootloader*=<grub|grub2|u-boot>::
++    Add new kernel to Bootloader configuration.
+ 
+ *--linuxrc*=<file>::
+     Use <file> for the linuxrc instead of the genkernel linuxrc.
+diff --git a/gen_bootloader.sh b/gen_bootloader.sh
+index 06fb7ba..48d707c 100755
+--- a/gen_bootloader.sh
++++ b/gen_bootloader.sh
+@@ -12,6 +12,9 @@ set_bootloader() {
+ 		grub2)
+ 			set_bootloader_grub2
+ 			;;
++		u-boot)
++			set_bootloader_u-boot
++			;;
+ 		no)
+ 			print_info 1 "--no-bootloader set; Skipping bootloader update ..."
+ 			;;
+@@ -21,6 +24,10 @@ set_bootloader() {
+ 	esac
+ }
+ 
++set_bootloader_u-boot() {
++	u-boot-update || gen_die "failed to write extlinux.conf"
++}
++
+ set_bootloader_read_fstab() {
+ 	local ROOTFS=$(awk 'BEGIN{RS="((#[^\n]*)?\n)"}( $2 == "/" ) { print $1; exit }' /etc/fstab)
+ 	local BOOTFS=$(awk 'BEGIN{RS="((#[^\n]*)?\n)"}( $2 == "'${BOOTDIR}'") { print $1; exit }' /etc/fstab)
+diff --git a/gen_cmdline.sh b/gen_cmdline.sh
+index a34a739..b97cbe8 100755
+--- a/gen_cmdline.sh
++++ b/gen_cmdline.sh
+@@ -13,6 +13,8 @@ longusage() {
+   echo "  initramfs			Build only the ramdisk/initramfs"
+   echo "  kernel			Build only the kernel and modules"
+   echo "  ramdisk			Build only the ramdisk/initramfs"
++  echo "  fdt				Build only the fdt/dtb"
++  echo "  dtb				Build only the fdt/dtb"
+   echo
+   echo "Available Options: "
+   echo "  Configuration settings"
+@@ -156,8 +158,8 @@ longusage() {
+   echo "				Embed CURRENT active console font from host running genkernel"
+   echo "				or specified PSF font file into initramfs and activate early on boot."
+   echo "				Use NONE (default) to not embed any PSF file."
+-  echo "	--bootloader=(grub|grub2)"
+-  echo "				Add new kernel to GRUB (grub) or GRUB2 (grub2) bootloader"
++  echo "	--bootloader=(grub|grub2|u-boot)"
++  echo "				Add new kernel to bootloader"
+   echo "	--no-bootloader		Skip bootloader update"
+   echo "	--linuxrc=<file>	Specifies a user created linuxrc"
+   echo "	--busybox-config=<file>	Specifies a user created busybox config"
+@@ -261,7 +263,7 @@ usage() {
+   echo "Gentoo Linux Genkernel ${GK_V}"
+   echo
+   echo "Usage: "
+-  echo "	genkernel [options] (all|bzImage|initramfs|kernel)"
++  echo "	genkernel [options] (all|bzImage|dtb|fdt|initramfs|kernel)"
+   echo
+   echo 'Some useful options:'
+   echo '	--menuconfig		Run menuconfig after oldconfig'
+@@ -843,24 +845,34 @@ parse_cmdline() {
+ 			BUILD_KERNEL="yes"
+ 			BUILD_MODULES="yes"
+ 			BUILD_RAMDISK="yes"
++			BUILD_FDT="yes"
+ 			;;
+ 		ramdisk|initramfs)
+ 			BUILD_KERNEL="no"
+ 			BUILD_MODULES="no"
+ 			BUILD_RAMDISK="yes"
++			BUILD_FDT="no"
+ 			;;
+ 		kernel)
+ 			BUILD_KERNEL="yes"
+ 			BUILD_MODULES="yes"
+ 			BUILD_RAMDISK="no"
++			BUILD_FDT="no"
+ 			;;
+ 		bzImage)
+ 			BUILD_KERNEL="yes"
+ 			BUILD_MODULES="no"
+ 			BUILD_RAMDISK="no"
++			BUILD_FDT="no"
+ 			CMD_RAMDISKMODULES="no"
+ 			print_info 3 "CMD_RAMDISKMODULES: ${CMD_RAMDISKMODULES}"
+ 			;;
++		fdt|dtb)
++			BUILD_KERNEL="no"
++			BUILD_MODULES="no"
++			BUILD_RAMDISK="no"
++			BUILD_FDT="yes"
++			;;
+ 		--help)
+ 			longusage
+ 			exit 1
+diff --git a/gen_determineargs.sh b/gen_determineargs.sh
+index 6c5d01c..b430448 100755
+--- a/gen_determineargs.sh
++++ b/gen_determineargs.sh
+@@ -630,10 +630,10 @@ determine_real_args() {
+ 	fi
+ 
+ 	case "${BOOTLOADER}" in
+-		no|grub|grub2)
++		no|grub|grub2|u-boot)
+ 			;;
+ 		*)
+-			gen_die "Invalid bootloader '${BOOTLOADER}'; --bootloader=<bootloader> requires one of: no, grub, grub2"
++			gen_die "Invalid bootloader '${BOOTLOADER}'; --bootloader=<bootloader> requires one of: no, grub, grub2, u-boot"
+ 			;;
+ 	esac
+ 
+diff --git a/gen_fdt.sh b/gen_fdt.sh
+new file mode 100755
+index 0000000..e9446d1
+--- /dev/null
++++ b/gen_fdt.sh
+@@ -0,0 +1,8 @@
++compile_fdt() {
++	print_warning 1 'The fdt/dtb feature is highly experimental!'
++	make ${MAKEOPTS} dtbs
++}
++
++install_fdt() {
++	make ${MAKEOPTS} dtbs_install
++}
+diff --git a/genkernel b/genkernel
+index 857d3f5..2f37c6d 100755
+--- a/genkernel
++++ b/genkernel
+@@ -81,6 +81,7 @@ source "${GK_SHARE}"/gen_initramfs.sh || small_die "Could not read '${GK_SHARE}/
+ source "${GK_SHARE}"/gen_moddeps.sh || small_die "Could not read '${GK_SHARE}/gen_moddeps.sh'"
+ source "${GK_SHARE}"/gen_package.sh || small_die "Could not read '${GK_SHARE}/gen_package.sh'"
+ source "${GK_SHARE}"/gen_bootloader.sh || small_die "Could not read '${GK_SHARE}/gen_bootloader.sh'"
++source "${GK_SHARE}"/gen_fdt.sh || small_die "Could not read '${GK_SHARE}/gen_fdt.sh'"
+ 
+ export GK_MASTER_PID=${BASHPID}
+ 
+@@ -89,6 +90,7 @@ set_default_gk_trap
+ BUILD_KERNEL="no"
+ BUILD_RAMDISK="no"
+ BUILD_MODULES="no"
++BUILD_FDT="no"
+ 
+ # Parse all command line options...
+ GK_OPTIONS=$* # Save for later
+@@ -100,7 +102,7 @@ done
+ unset GK_OPTION
+ 
+ # Check if no action is specified...
+-if ! isTrue "${BUILD_KERNEL}" && ! isTrue "${BUILD_RAMDISK}"
++if ! isTrue "${BUILD_KERNEL}" && ! isTrue "${BUILD_RAMDISK}" && ! isTrue "${BUILD_FDT}"
+ then
+ 	usage
+ 	exit 1
+@@ -205,7 +207,7 @@ then
+ 	gen_kerncache_is_valid
+ fi
+ 
+-if isTrue "${KERNCACHE_IS_VALID}" && ! isTrue "${CMD_INSTALL}" && ! isTrue "${BUILD_RAMDISK}"
++if isTrue "${KERNCACHE_IS_VALID}" && ! isTrue "${CMD_INSTALL}" && ! isTrue "${BUILD_RAMDISK}" && ! isTrue "${BUILD_FDT}"
+ then
+ 	error_msg="Nothing to do: Selected action does not include building initramfs."
+ 	error_msg+=" Because kerncache is valid, no kernel will be build."
+@@ -385,6 +387,14 @@ then
+ 	compile_kernel yes
+ fi
+ 
++if isTrue "${BUILD_FDT}"
++then
++	print_info 1 '' 1 0
++
++	compile_fdt
++	install_fdt
++fi
++
+ if [ -n "${KERNCACHE}" ]
+ then
+ 	if ! isTrue "${KERNCACHE_IS_VALID}"

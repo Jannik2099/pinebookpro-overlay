@@ -76,9 +76,9 @@ if [[ ${PV} == 9999* ]] ; then
 	S="${WORKDIR}/${P}"
 	SRC_URI="${COMMON_URI}"
 else
-	SRC_URI="https://github.com/Jannik2099/genkernel/archive/v${PV}-u-boot.tar.gz -> ${P}.tar.gz
+	SRC_URI="https://dev.gentoo.org/~whissi/dist/genkernel/${P}.tar.xz
 		${COMMON_URI}"
-	KEYWORDS="~alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 sh sparc x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 fi
 
 DESCRIPTION="Gentoo automatic kernel building scripts"
@@ -107,9 +107,11 @@ RDEPEND="${DEPEND}
 	virtual/pkgconfig
 	firmware? ( sys-kernel/linux-firmware )"
 
-#if [[ ${PV} == 9999* ]]; then
+if [[ ${PV} == 9999* ]]; then
 	DEPEND="${DEPEND} app-text/asciidoc"
-#fi
+fi
+
+PATCHES="${FILESDIR}/genkernel-pbp.patch"
 
 src_unpack() {
 	if [[ ${PV} == 9999* ]]; then
@@ -119,7 +121,6 @@ src_unpack() {
 		for gk_src_file in ${A} ; do
 			if [[ ${gk_src_file} == genkernel-* ]] ; then
 				unpack "${gk_src_file}"
-				mv ${WORKDIR}/${P}* ${WORKDIR}/${P}
 			fi
 		done
 	fi
@@ -178,8 +179,6 @@ src_prepare() {
 src_compile() {
 	if [[ ${PV} == 9999* ]] ; then
 		emake
-	else
-		a2x --conf-file=doc/asciidoc.conf --attribute="genkernelversion=${PVR}" --format=manpage -D . doc/genkernel.8.txt
 	fi
 }
 
@@ -188,7 +187,7 @@ src_install() {
 	doins "${S}"/genkernel.conf
 
 	doman genkernel.8
-	dodoc AUTHORS README TODO
+	dodoc AUTHORS ChangeLog README TODO
 	dobin genkernel
 	rm -f genkernel genkernel.8 AUTHORS ChangeLog README TODO genkernel.conf
 
