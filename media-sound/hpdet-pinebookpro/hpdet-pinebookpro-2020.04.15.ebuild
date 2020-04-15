@@ -4,9 +4,9 @@
 EAPI=7
 
 DESCRIPTION="Disables/enables the speaker on headphone plug/unplug"
-HOMEPAGE="https://gitlab.manjaro.org/tsys/hpdet-pinebookpro"
-EGIT_REPO_URI="https://gitlab.manjaro.org/tsys/hpdet-pinebookpro.git"
-EGIT_COMMIT="da92e5687fea4e32791a19df962412407d3372ff"
+HOMEPAGE="https://gitlab.manjaro.org/manjaro-arm/packages/community/pinebookpro-audio"
+EGIT_REPO_URI="https://gitlab.manjaro.org/manjaro-arm/packages/community/pinebookpro-audio.git"
+EGIT_COMMIT="fcb1538d5be5a6324a18a0684b254b52a9138a76"
 
 inherit git-r3 linux-info
 
