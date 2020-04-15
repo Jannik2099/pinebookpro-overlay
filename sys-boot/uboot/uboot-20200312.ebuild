@@ -32,7 +32,7 @@ src_configure() {
 	fi
 
 	if use savedconfig; then
-		cp /etc/portage/sys-boot/uboot/uboot.config "${S}"/.config || die "could not find uboot.config"
+		cp /etc/portage/savedconfig/sys-boot/uboot/uboot.config "${S}"/.config || die "could not find uboot.config"
 	else
 		emake pinebook_pro-rk3399_defconfig || die
 	fi
