@@ -12,19 +12,13 @@ DESCRIPTION="Manjaro Kernel sources for the Pinebook Pro"
 HOMEPAGE="https://gitlab.manjaro.org/tsys/linux-pinebook-pro"
 EGIT_REPO_URI="https://gitlab.manjaro.org/tsys/linux-pinebook-pro.git"
 EGIT_REPO_BRANCH="v5.6"
-EGIT_REPO_COMMIT="HEAD"
+EGIT_REPO_COMMIT="7614efe4b1fad784a96865e6e4a3b9d6feafb9f8"
 EGIT_CHECKOUT_DIR="linux-pinebook-pro-${PVR}"
 
-KEYWORDS=""
+KEYWORDS="~arm64"
 IUSE="performance-patches recommended-patches"
 
 S="${WORKDIR}"/linux-pinebook-pro-"${PVR}"
-
-pkg_pretend() {
-	ewarn 'This is a live ebuild, it follows git HEAD of the Tsys kernel repo'
-	ewarn 'Regardless, I will always rename this to the newest rc so it triggers an update on your side'
-	ewarn 'It is not possible to preserver previous rcs because Tsys rebases the branch, losing commit history'
-}
 
 src_prepare() {
 	if use performance-patches; then
@@ -39,5 +33,5 @@ src_prepare() {
 }
 
 src_configure() {
-	cp "${FILESDIR}"/default-config "${S}"/.config
+	xzcat "${FILESDIR}/default-config.xz" > "${S}/.config"
 }
