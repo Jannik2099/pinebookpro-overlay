@@ -118,7 +118,7 @@ index a34a739..b97cbe8 100755
  			longusage
  			exit 1
 diff --git a/gen_determineargs.sh b/gen_determineargs.sh
-index 6c5d01c..b430448 100755
+index 95ec402..ac7f83b 100755
 --- a/gen_determineargs.sh
 +++ b/gen_determineargs.sh
 @@ -630,10 +630,10 @@ determine_real_args() {
@@ -149,7 +149,7 @@ index 0000000..e9446d1
 +	make ${MAKEOPTS} dtbs_install
 +}
 diff --git a/genkernel b/genkernel
-index 857d3f5..2f37c6d 100755
+index 33dd89d..dfa7afc 100755
 --- a/genkernel
 +++ b/genkernel
 @@ -81,6 +81,7 @@ source "${GK_SHARE}"/gen_initramfs.sh || small_die "Could not read '${GK_SHARE}/
@@ -201,3 +201,16 @@ index 857d3f5..2f37c6d 100755
  if [ -n "${KERNCACHE}" ]
  then
  	if ! isTrue "${KERNCACHE_IS_VALID}"
+diff --git a/genkernel.conf b/genkernel.conf
+index 43415ef..460d033 100644
+--- a/genkernel.conf
++++ b/genkernel.conf
+@@ -156,7 +156,7 @@ NOCOLOR="false"
+ #DISKLABEL="yes"
+ 
+ # Add new kernel to grub
+-# Possible values: empty/"no", "grub", "grub2"
++# Possible values: empty/"no", "grub", "grub2" "u-boot"
+ #BOOTLOADER="no"
+ 
+ # Use sandbox when building initramfs
