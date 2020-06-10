@@ -23,7 +23,8 @@ src_prepare() {
 	eapply "${FILESDIR}/0010-arm64-dts-rockchip-add-cw2015-node-to-PBP.patch"
 	eapply "${FILESDIR}/0011-fix-wonky-wifi-bt-on-PBP.patch"
 	eapply "${FILESDIR}/0012-add-suspend-to-rk3399-PBP.patch"
-	eapply "${FILESDIR}/0013-add-dp-alt-mode-to-PBP.patch"
+	eapply "${FILESDIR}/0013-arm64-dts-rockchip-setup-USB-type-c-port-as-dual-dat.patch"
+	eapply "${FILESDIR}/0015-add-dp-alt-mode-to-PBP.patch"
 	cp "${FILESDIR}/config-${PV}" "${S}/.config"
 	cp "${FILESDIR}/config-${PV}" "${S}/manjaro_config"
 
@@ -34,10 +35,6 @@ pkg_postinst() {
 	kernel-2_pkg_postinst
 	einfo "For more info on this patchset, and how to report problems, see:"
 	einfo "${HOMEPAGE}"
-
-	ewarn "This is the first time I base the manjaro patches ontop of gentoo-sources"
-	ewarn "While I don't think anything could break here, I don't have an opportunity to test this now or the next few days"
-	ewarn "Manjaros config is installed as .config and as manjaro_config, I heavily recommend you start with that and deselect stuff you don't need"
 }
 
 pkg_postrm() {

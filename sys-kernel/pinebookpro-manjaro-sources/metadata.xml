@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<!DOCTYPE pkgmetadata SYSTEM 'http://www.gentoo.org/dtd/metadata.dtd'>
 <pkgmetadata>
-<use>
-	<flag name="recommended-patches">patches recommended for functionality</flag>
-	<flag name="performance-patches">patches which enable configuration options for higher kernel performance</flag>
-</use>
+	<maintainer type="person">
+		<email>jannik.glueckert@gmail.com</email>
+		<name>Jannik Glückert</name>
+	</maintainer>
+	<use>
+		<flag name="experimental">Apply experimental patches; for more information, see "https://wiki.gentoo.org/wiki/Project:Kernel/Experimental".</flag>
+	</use>
 </pkgmetadata>
+
