@@ -3,17 +3,17 @@
 
 EAPI=7
 
-DESCRIPTION="RK3399 ATF Binary"
-HOMEPAGE="https://developer.trustedfirmware.org/dashboard/view/6/"
+DESCRIPTION="Trusted Firmware for A profile Arm CPUs - precompiled binaries"
+HOMEPAGE="https://www.trustedfirmware.org/"
 SRC_URI=""
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="arm64"
+KEYWORDS="-* arm64"
 IUSE=""
 
 DEPEND=""
-RDEPEND="${DEPEND} !sys-firmware/arm-trusted-firmware"
+RDEPEND="${DEPEND} !sys-firmware/trusted-firmware-a"
 BDEPEND=""
 
 S="${WORKDIR}"
@@ -23,6 +23,6 @@ src_unpack() {
 }
 
 src_install() {
-	insinto /usr/share/arm-trusted-firmware/build/rk3399/release/bl31/
+	insinto /usr/share/trusted-firmware-a/rk3399/
 	doins bl31.elf
 }

@@ -1,0 +1,3 @@
+move sys-boot/uboot sys-boot/u-boot
+move sys-firmware/arm-trusted-firmware sys-firmware/trusted-firmware-a
+move sys-firmware/arm-trusted-firmware-bin sys-firmware/trusted-firmware-a-bin
