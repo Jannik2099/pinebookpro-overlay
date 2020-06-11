@@ -16,8 +16,8 @@ IUSE="build-tfa"
 
 DEPEND="
 	sys-apps/dtc
-	!build-tfa? ( sys-firmware/trusted-firmware-a-bin )
-	build-tfa? ( sys-firmware/trusted-firmware-a )
+	!build-tfa? ( >=sys-firmware/trusted-firmware-a-bin-2.2-r1 )
+	build-tfa? ( >=sys-firmware/trusted-firmware-a-2.2-r1 )
 "
 RDEPEND="${DEPEND}"
 BDEPEND=""
