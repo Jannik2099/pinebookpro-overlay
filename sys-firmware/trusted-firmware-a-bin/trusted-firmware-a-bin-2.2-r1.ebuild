@@ -19,7 +19,7 @@ BDEPEND=""
 S="${WORKDIR}"
 
 src_unpack() {
-	cp "${FILESDIR}"/bl31.elf "${WORKDIR}"/bl31.elf
+	cp "${FILESDIR}"/${PV}-bl31.elf "${WORKDIR}"/bl31.elf
 }
 
 src_install() {
