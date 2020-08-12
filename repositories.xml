@@ -3,7 +3,7 @@
 <repositories xmlns="" version="1.0">
 <repo quality="experimental" status="unofficial">
 	<name>pinebookpro-overlay</name>
-	<description>Gentoo overlay for the Pinebook Pro</description>
+	<description>Gentoo overlay for the Pinebook Pro & Rockpro64</description>
 	<homepage>https://github.com/Jannik2099/pinebookpro-overlay</homepage>
 	<owner type="person">
 		<email>jannik.glueckert@gmail.com</email>
