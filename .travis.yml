@@ -1,0 +1,22 @@
+language: minimal
+services: docker
+arch:
+        - arm64
+os: linux
+dist: bionic
+branches:
+        only:
+        - master
+#Register the packages you want to track here, in the form ${CATEGORY}/${PN}
+#Doing this via envs may seem weird, but it makes maintenance and workarounds easier and avoids code duplication
+env:
+        - PACKAGE=app-portage/pinebookpro-profile-overrides
+        - PACKAGE=media-sound/hpdet-pinebookpro
+        - PACKAGE=sys-boot/extlinux
+        - PACAKGE=sys-boot/u-boot
+        - PACKAGE=sys-firmware/pinebookpro-firmware
+        - PACKAGE=sys-firmware/pinebookpro-misc
+        - PACKAGE=sys-firmware/trusted-firmware-a-bin
+        - PACKAGE=sys-kernel/pinebookpro-manjaro-sources
+        - PACKAGE=virtual/linux-sources
+script: .travis/run.sh
