@@ -5,24 +5,19 @@ EAPI=7
 
 DESCRIPTION="profile overrides for the Pinebook Pro"
 HOMEPAGE="https://github.com/Jannik2099/pinebookpro-overlay/"
-SRC_URI=""
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="arm64"
 
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""
-
 src_unpack() {
-	mkdir -p "${S}"
+	mkdir -p "${S}" || die
 }
 
 src_prepare() {
-	cp -r "${FILESDIR}"/* "${S}"
+	cp -r "${FILESDIR}"/* "${S}" || die
 
-	eapply_user
+	default
 }
 
 src_install() {

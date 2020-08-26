@@ -11,14 +11,8 @@ EGIT_REPO_URI="https://github.com/ssvb/xf86-video-fbturbo.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
 
-DEPEND="
-x11-base/xorg-server
-"
-RDEPEND="${DEPEND}"
-BDEPEND=""
+DEPEND="x11-base/xorg-server"
 
 PATCHES=(
 	"${FILESDIR}/0001-Use-own-thunk-functions-instead-of-fbdevHW-Weak.patch"
@@ -32,6 +26,6 @@ src_configure() {
 
 src_install() {
 	default
-	mkdir -p "${D}/etc/X11/xorg.conf.d"
-	cp xorg.conf "${D}/etc/X11/xorg.conf.d/99-fbturbo.conf"
+	mkdir -p "${D}/etc/X11/xorg.conf.d" || die
+	cp xorg.conf "${D}/etc/X11/xorg.conf.d/99-fbturbo.conf" || die
 }

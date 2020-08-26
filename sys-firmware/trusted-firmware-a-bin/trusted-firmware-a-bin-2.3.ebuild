@@ -10,16 +10,13 @@ SRC_URI=""
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="-* ~arm64"
-IUSE=""
 
-DEPEND=""
-RDEPEND="${DEPEND} !sys-firmware/trusted-firmware-a"
-BDEPEND=""
+RDEPEND="!sys-firmware/trusted-firmware-a"
 
 S="${WORKDIR}"
 
 src_unpack() {
-	cp "${FILESDIR}"/${PV}-bl31.elf "${WORKDIR}"/bl31.elf
+	cp "${FILESDIR}"/${PV}-bl31.elf bl31.elf || die
 }
 
 src_install() {

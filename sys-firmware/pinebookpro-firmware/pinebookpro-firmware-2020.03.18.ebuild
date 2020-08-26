@@ -13,26 +13,21 @@ EGIT_COMMIT="a30bf312b268eab42d38fab0cc3ed3177895ff5d"
 LICENSE="Broadcom"
 SLOT="0"
 KEYWORDS="arm64"
-IUSE=""
-
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""
 
 src_prepare() {
-	rm PKGBUILD
-	mkdir brcm
+	rm PKGBUILD || die
+	mkdir brcm || die
 
-	cp BCM4345C5.hcd brcm/BCM.hcd
-	cp BCM4345C5.hcd brcm/BCM4345C5.hcd
+	cp BCM4345C5.hcd brcm/BCM.hcd || die
+	cp BCM4345C5.hcd brcm/BCM4345C5.hcd || die
 
-	cp nvram_ap6256.txt brcm/brcmfmac43456-sdio.pine64,pinebook-pro.txt
+	cp nvram_ap6256.txt brcm/brcmfmac43456-sdio.pine64,pinebook-pro.txt || die
 
-	mv fw_bcm43456c5_ag.bin brcm/brcmfmac43456-sdio.bin
+	mv fw_bcm43456c5_ag.bin brcm/brcmfmac43456-sdio.bin || die
 
-	mv brcmfmac43456-sdio.clm_blob brcm/brcmfmac43456-sdio.clm_blob
+	mv brcmfmac43456-sdio.clm_blob brcm/brcmfmac43456-sdio.clm_blob || die
 
-	eapply_user
+	default
 }
 
 src_install() {

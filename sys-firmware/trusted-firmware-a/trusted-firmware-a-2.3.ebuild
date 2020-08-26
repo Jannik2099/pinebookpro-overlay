@@ -10,16 +10,12 @@ SRC_URI="https://git.trustedfirmware.org/TF-A/${PN}.git/snapshot/${P}.tar.gz -> 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="-* ~arm64"
-IUSE=""
-
-DEPEND=""
-RDEPEND="${DEPEND} !sys-firmware/trusted-firmware-a-bin"
-BDEPEND=""
+RDEPEND="!sys-firmware/trusted-firmware-a-bin"
 
 src_compile() {
 	which arm-none-eabi-gcc || die "arm-none-eabi toolchain not found!"
 	unset CFLAGS CXXFLAGS CPPFLAGS LDFLAGS
-	emake PLAT=rk3399 || die
+	emake PLAT=rk3399
 }
 
 src_install() {

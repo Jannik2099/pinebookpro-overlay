@@ -13,14 +13,11 @@ inherit git-r3 linux-info
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~arm64"
-IUSE=""
 
-DEPEND="
-sys-power/acpid"
 RDEPEND="
-media-sound/alsa-utils
-${DEPEND}"
-BDEPEND=""
+	media-sound/alsa-utils
+	sys-power/acpid
+"
 
 pkg_pretend() {
 	if kernel_is -lt 5 6; then

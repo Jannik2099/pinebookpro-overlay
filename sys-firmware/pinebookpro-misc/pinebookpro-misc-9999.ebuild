@@ -11,23 +11,17 @@ EGIT_REPO_URI="https://gitlab.manjaro.org/manjaro-arm/packages/community/pineboo
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
-IUSE=""
-
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""
 
 src_prepare() {
-	rm PKGBUILD
+	rm PKGBUILD || die
 
-	mkdir -p etc/udev/hwdb.d
-	mv 10-usb-kbd.hwdb etc/udev/hwdb.d/10-usb-kbd.hwdb
+	mkdir -p etc/udev/hwdb.d || die
+	mv 10-usb-kbd.hwdb etc/udev/hwdb.d/10-usb-kbd.hwdb || die
 
-	mkdir -p var/lib/alsa
-	mv asound.state var/lib/alsa/asound.state
+	mkdir -p var/lib/alsa || die
+	mv asound.state var/lib/alsa/asound.state || die
 
-	eapply_user
+	default
 }
 
 src_install() {
@@ -36,9 +30,9 @@ src_install() {
 
 pkg_postinst() {
 	if test -f /bin/systemctl; then
-		systemd-hwdb update
+		systemd-hwdb update || die
 	else
-		udevadm hwdb --update
+		udevadm hwdb --update || die
 	fi
-	udevadm control --reload
+	udevadm control --reload || die
 }

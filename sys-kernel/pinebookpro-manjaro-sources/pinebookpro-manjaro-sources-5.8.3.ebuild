@@ -19,8 +19,8 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
 
 src_prepare() {
 	eapply "${FILESDIR}/0007-pbp-support.patch"
-	cp "${FILESDIR}/config-${PV}" "${S}/.config"
-	cp "${FILESDIR}/config-${PV}" "${S}/manjaro_config"
+	cp "${FILESDIR}/config-${PV}" "${S}/.config" || die
+	cp "${FILESDIR}/config-${PV}" "${S}/manjaro_config" || die
 
 	kernel-2_src_prepare
 }

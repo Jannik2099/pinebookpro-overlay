@@ -25,8 +25,8 @@ src_prepare() {
 	eapply "${FILESDIR}/0012-add-suspend-to-rk3399-PBP.patch"
 	eapply "${FILESDIR}/0013-arm64-dts-rockchip-setup-USB-type-c-port-as-dual-dat.patch"
 	eapply "${FILESDIR}/0015-add-dp-alt-mode-to-PBP.patch"
-	cp "${FILESDIR}/config-${PV}" "${S}/.config"
-	cp "${FILESDIR}/config-${PV}" "${S}/manjaro_config"
+	cp "${FILESDIR}/config-${PV}" "${S}/.config" || die
+	cp "${FILESDIR}/config-${PV}" "${S}/manjaro_config" || die
 
 	kernel-2_src_prepare
 }

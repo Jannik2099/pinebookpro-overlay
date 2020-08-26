@@ -16,19 +16,14 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="arm64"
-IUSE=""
-
-DEPEND=""
-RDEPEND="${DEPEND}"
-BDEPEND=""
 
 S="${WORKDIR}/u-boot-menu-${PV}"
 
 src_install() {
-dobin u-boot-update
-doman u-boot-update.8
-if ! test -f /etc/default/u-boot; then
-	insinto /etc/default
-	newins default u-boot
-fi
+	dobin u-boot-update
+	doman u-boot-update.8
+	if ! test -f /etc/default/u-boot; then
+		insinto /etc/default
+		newins default u-boot
+	fi
 }
