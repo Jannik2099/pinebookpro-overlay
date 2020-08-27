@@ -9,7 +9,7 @@ SRC_URI="https://git.trustedfirmware.org/TF-A/${PN}.git/snapshot/${P}.tar.gz -> 
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="-* ~arm64"
+KEYWORDS="-* arm64"
 RDEPEND="!sys-firmware/trusted-firmware-a-bin"
 
 src_compile() {

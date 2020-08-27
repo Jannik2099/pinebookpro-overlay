@@ -9,7 +9,7 @@ SRC_URI=""
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="-* ~arm64"
+KEYWORDS="-* arm64"
 
 RDEPEND="!sys-firmware/trusted-firmware-a"
 
