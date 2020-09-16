@@ -1,2 +1,0 @@
-#undiagnosed boot issues
->sys-kernel/pinebookpro-manjaro-sources-5.8.3
