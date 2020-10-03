@@ -4,7 +4,8 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="12"
+K_GENPATCHES_VER="16"
+MANJARO_COMMIT="1d1ea107429fe9a05d2d6d249e50e777a5fa9e80"
 
 inherit kernel-2
 detect_version
@@ -15,12 +16,17 @@ HOMEPAGE="https://dev.gentoo.org/~mpagano/genpatches"
 IUSE="experimental"
 
 DESCRIPTION="Full sources including the Gentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
-SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}"
+SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/config
+		-> kernel-aarch64-manjaro.config-${PV}
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0007-pbp-support.patch
+		-> 0007-pbp-support-${PV}.patch
+"
 
 src_prepare() {
-	eapply "${FILESDIR}/0007-pbp-support.patch"
-	cp "${FILESDIR}/config-${PV}" "${S}/.config" || die
-	cp "${FILESDIR}/config-${PV}" "${S}/manjaro_config" || die
+	eapply "${DISTDIR}/0007-pbp-support-${PV}.patch"
+	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/.config" || die
+	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/manjaro_config" || die
 
 	kernel-2_src_prepare
 }
