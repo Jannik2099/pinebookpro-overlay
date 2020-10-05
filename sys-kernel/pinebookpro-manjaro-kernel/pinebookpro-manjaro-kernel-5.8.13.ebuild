@@ -76,7 +76,7 @@ src_prepare() {
 		# enable /proc/config.gz, used by linux-info.eclass
 		-e '/CONFIG_IKCONFIG/s:.*:CONFIG_IKCONFIG=y\nCONFIG_IKCONFIG_PROC=y:'
 	)
-	use debug || config_tweaks+=(
+	config_tweaks+=(
 		-e '/CONFIG_DEBUG_INFO/d'
 		-e '/CONFIG_DEBUG_RODATA_TEST/d'
 		-e '/CONFIG_DEBUG_VM/d'
