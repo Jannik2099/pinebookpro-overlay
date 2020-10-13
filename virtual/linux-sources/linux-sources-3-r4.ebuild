@@ -12,6 +12,7 @@ RDEPEND="
 	firmware? ( sys-kernel/linux-firmware )
 	|| (
 		sys-kernel/pinebookpro-manjaro-sources
+		sys-kernel/pinebookpro-manjaro-kernel
 		sys-kernel/gentoo-sources
 		sys-kernel/vanilla-sources
 		sys-kernel/ck-sources
