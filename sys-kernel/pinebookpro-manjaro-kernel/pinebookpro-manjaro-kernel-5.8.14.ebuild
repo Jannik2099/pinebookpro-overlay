@@ -7,7 +7,7 @@ inherit kernel-build
 
 MY_P=linux-${PV%.*}
 GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 3 ))
-MANJARO_COMMIT="1d1ea107429fe9a05d2d6d249e50e777a5fa9e80"
+MANJARO_COMMIT="4e603f4e710b1820e506e54a95c2e0a68b4765c3"
 
 DESCRIPTION="Linux kernel built with Gentoo patches"
 HOMEPAGE="https://www.kernel.org/"
@@ -19,6 +19,8 @@ SRC_URI+=" https://cdn.kernel.org/pub/linux/kernel/v$(ver_cut 1).x/${MY_P}.tar.x
 		-> kernel-aarch64-manjaro.config-${PV}
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0007-pbp-support.patch
 		-> 0007-pbp-support-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0021-pwm-rockchip-Keep-enabled-PWMs-running-while-probing.patch
+		-> 0021-rockchip-pwm-${PV}.patch
 	"
 S=${WORKDIR}/${MY_P}
 
@@ -32,7 +34,8 @@ RDEPEND="
 
 src_prepare() {
 	local PATCHES=(
-		"${DISTDIR}/0007-pbp-support-${PV}.patch"
+		"${DISTDIR}/0007-pbp-support-${PV}.patch
+		${DISTDIR}/0021-rockchip-pwm-${PV}.patch"
 		# meh, genpatches have no directory
 		"${WORKDIR}"/*.patch
 	)

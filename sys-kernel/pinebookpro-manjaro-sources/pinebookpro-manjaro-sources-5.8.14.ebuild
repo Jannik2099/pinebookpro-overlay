@@ -5,7 +5,7 @@ EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
 K_GENPATCHES_VER="16"
-MANJARO_COMMIT="1d1ea107429fe9a05d2d6d249e50e777a5fa9e80"
+MANJARO_COMMIT="4e603f4e710b1820e506e54a95c2e0a68b4765c3"
 
 inherit kernel-2
 detect_version
@@ -21,10 +21,13 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 		-> kernel-aarch64-manjaro.config-${PV}
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0007-pbp-support.patch
 		-> 0007-pbp-support-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0021-pwm-rockchip-Keep-enabled-PWMs-running-while-probing.patch
+		-> 0021-rockchip-pwm-${PV}.patch
 "
 
 src_prepare() {
 	eapply "${DISTDIR}/0007-pbp-support-${PV}.patch"
+	eapply "${DISTDIR}/0021-rockchip-pwm-${PV}.patch"
 	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/.config" || die
 	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/manjaro_config" || die
 
