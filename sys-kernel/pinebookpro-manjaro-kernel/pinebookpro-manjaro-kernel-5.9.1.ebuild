@@ -7,7 +7,7 @@ inherit kernel-build
 
 MY_P=linux-${PV%.*}
 GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 1 ))
-MANJARO_COMMIT="16cb321757e376838f927d82c401f96b17ac4144"
+MANJARO_COMMIT="be20bed31d412ed937086eedc917e024df49bee9"
 
 DESCRIPTION="Linux kernel built with Gentoo patches"
 HOMEPAGE="https://www.kernel.org/"

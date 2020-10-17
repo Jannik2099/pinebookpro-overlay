@@ -4,7 +4,7 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="1"
+K_GENPATCHES_VER="2"
 MANJARO_COMMIT="16cb321757e376838f927d82c401f96b17ac4144"
 
 inherit kernel-2
