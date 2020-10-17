@@ -29,6 +29,8 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 		-> 0015-panfrost-coherency-${PV}.patch
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0017-dts-rockchip-remove-pcie-max-speed-from-pinebook-pro.patch
 		-> 0017-rockchips-dts-pcie-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0013-nuumio-panfrost-Silence-Panfrost-gem-shrinker-loggin.patch
+		-> 0013-panfrost-gem-shrinker-${PV}.patch
 "
 
 src_prepare() {
