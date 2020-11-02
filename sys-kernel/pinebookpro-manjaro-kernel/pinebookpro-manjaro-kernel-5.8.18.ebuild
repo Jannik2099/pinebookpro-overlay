@@ -19,8 +19,6 @@ SRC_URI+=" https://cdn.kernel.org/pub/linux/kernel/v$(ver_cut 1).x/${MY_P}.tar.x
 		-> kernel-aarch64-manjaro.config-${PV}
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0007-pbp-support.patch
 		-> 0007-pbp-support-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0021-pwm-rockchip-Keep-enabled-PWMs-running-while-probing.patch
-		-> 0021-rockchip-pwm-${PV}.patch
 	"
 S=${WORKDIR}/${MY_P}
 
@@ -34,10 +32,9 @@ RDEPEND="
 
 src_prepare() {
 	local PATCHES=(
-		"${DISTDIR}/0007-pbp-support-${PV}.patch
-		${DISTDIR}/0021-rockchip-pwm-${PV}.patch"
 		# meh, genpatches have no directory
 		"${WORKDIR}"/*.patch
+		"${DISTDIR}"/*.patch
 	)
 	default
 

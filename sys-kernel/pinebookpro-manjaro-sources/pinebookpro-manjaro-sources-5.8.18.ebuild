@@ -21,13 +21,10 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 		-> kernel-aarch64-manjaro.config-${PV}
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0007-pbp-support.patch
 		-> 0007-pbp-support-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0021-pwm-rockchip-Keep-enabled-PWMs-running-while-probing.patch
-		-> 0021-rockchip-pwm-${PV}.patch
 "
 
 src_prepare() {
-	eapply "${DISTDIR}/0007-pbp-support-${PV}.patch"
-	eapply "${DISTDIR}/0021-rockchip-pwm-${PV}.patch"
+	eapply "${DISTDIR}"/*.patch
 	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/.config" || die
 	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/manjaro_config" || die
 
