@@ -7,7 +7,7 @@ inherit kernel-build
 
 MY_P=linux-${PV%.*}
 GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 1 ))
-MANJARO_COMMIT="be20bed31d412ed937086eedc917e024df49bee9"
+MANJARO_COMMIT="abdb802476d60e4b1d5a2d0b2584cac10621eab3"
 
 DESCRIPTION="Linux kernel built with Gentoo patches"
 HOMEPAGE="https://www.kernel.org/"
@@ -25,10 +25,14 @@ SRC_URI+=" https://cdn.kernel.org/pub/linux/kernel/v$(ver_cut 1).x/${MY_P}.tar.x
 		-> 0010-rockchip-pcie-${PV}.patch
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0015-drm-panfrost-Coherency-support.patch
 		-> 0015-panfrost-coherency-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0017-dts-rockchip-remove-pcie-max-speed-from-pinebook-pro.patch
-		-> 0017-rockchips-dts-pcie-${PV}.patch
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0013-nuumio-panfrost-Silence-Panfrost-gem-shrinker-loggin.patch
 		-> 0013-panfrost-gem-shrinker-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0022-typec-displayport-some-devices-have-pin-assignments-reversed.patch
+		-> 0022-usbc-dp-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0023-usb-typec-tcpm-Add-generic-extcon-for-tcpm-enabled-devices.patch
+		-> 0023-usbc-tcpm-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0024-usb-typec-tcpm-Add-generic-extcon-to-tcpm.patch
+		-> 0024-usbc-tcpm-${PV}.patch
 	"
 S=${WORKDIR}/${MY_P}
 
