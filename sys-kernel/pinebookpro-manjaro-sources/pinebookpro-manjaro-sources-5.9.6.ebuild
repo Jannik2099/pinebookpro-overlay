@@ -4,8 +4,8 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="4"
-MANJARO_COMMIT="abdb802476d60e4b1d5a2d0b2584cac10621eab3"
+K_GENPATCHES_VER="6"
+MANJARO_COMMIT="0e05320d7d31080948b5c11c0af5170478307c01"
 
 inherit kernel-2
 detect_version

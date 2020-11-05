@@ -6,8 +6,8 @@ EAPI=7
 inherit kernel-build
 
 MY_P=linux-${PV%.*}
-GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 1 ))
-MANJARO_COMMIT="abdb802476d60e4b1d5a2d0b2584cac10621eab3"
+GENPATCHES_P=genpatches-${PV%.*}-${PV##*.}
+MANJARO_COMMIT="0e05320d7d31080948b5c11c0af5170478307c01"
 
 DESCRIPTION="Linux kernel built with Gentoo patches"
 HOMEPAGE="https://www.kernel.org/"
