@@ -4,8 +4,9 @@
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="8"
-MANJARO_COMMIT="0e05320d7d31080948b5c11c0af5170478307c01"
+K_GENPATCHES_VER="11"
+K_NODRYRUN="1"
+MANJARO_COMMIT="a340baadcf01fc3575b5d78a164296a287f38be1"
 
 inherit kernel-2
 detect_version
@@ -33,6 +34,8 @@ SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 		-> 0023-usbc-tcpm-${PV}.patch
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0024-usb-typec-tcpm-Add-generic-extcon-to-tcpm.patch
 		-> 0024-usbc-tcpm-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0026-rk3399-rp64-pcie-Reimplement-rockchip-PCIe-bus-scan-delay.patch
+		-> 0026-rk3399-rp64-pcie-Reimplement-rockchip-PCIe-bus-scan-delay-${PV}.patch
 "
 
 src_prepare() {
