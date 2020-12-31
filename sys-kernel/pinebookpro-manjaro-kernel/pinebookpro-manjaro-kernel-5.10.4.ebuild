@@ -6,8 +6,9 @@ EAPI=7
 inherit kernel-build
 
 MY_P=linux-${PV%.*}
-GENPATCHES_P=genpatches-${PV%.*}-${PV##*.}
-MANJARO_COMMIT="a340baadcf01fc3575b5d78a164296a287f38be1"
+GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 2 ))
+CONFIG_VER=5.10.2
+MANJARO_COMMIT="c60ca9aefeffb6e6cfafe36712bec2c3e265aa0a"
 GENTOO_CONFIG_VER=5.9.8-r1
 
 DESCRIPTION="Linux kernel built with Gentoo patches"
@@ -22,20 +23,20 @@ SRC_URI+=" https://cdn.kernel.org/pub/linux/kernel/v$(ver_cut 1).x/${MY_P}.tar.x
 		-> kernel-aarch64-manjaro.config-${PV}
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0007-pbp-support.patch
 		-> 0007-pbp-support-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0010-PCI-rockchip-Fix-PCIe-probing-in-5.9.patch
-		-> 0010-rockchip-pcie-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0015-drm-panfrost-Coherency-support.patch
-		-> 0015-panfrost-coherency-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0013-nuumio-panfrost-Silence-Panfrost-gem-shrinker-loggin.patch
-		-> 0013-panfrost-gem-shrinker-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0022-typec-displayport-some-devices-have-pin-assignments-reversed.patch
-		-> 0022-usbc-dp-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0023-usb-typec-tcpm-Add-generic-extcon-for-tcpm-enabled-devices.patch
-		-> 0023-usbc-tcpm-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0024-usb-typec-tcpm-Add-generic-extcon-to-tcpm.patch
-		-> 0024-usbc-tcpm-${PV}.patch
-	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0026-rk3399-rp64-pcie-Reimplement-rockchip-PCIe-bus-scan-delay.patch
-		-> 0026-rk3399-rp64-pcie-Reimplement-rockchip-PCIe-bus-scan-delay-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0011-nuumio-panfrost-Silence-Panfrost-gem-shrinker-loggin.patch
+		-> 0011-panfrost-gem-shrinker-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0014-typec-displayport-some-devices-have-pin-assignments-reversed.patch
+		-> 0014-usbc-dp-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0015-usb-typec-tcpm-Add-generic-extcon-for-tcpm-enabled-devices.patch
+		-> 0015-usbc-tcpm-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0016-usb-typec-tcpm-Add-generic-extcon-to-tcpm.patch
+		-> 0016-usbc-tcpm-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0018-ayufan-drm-rockchip-add-support-for-modeline-32MHz-e.patch
+		-> 0018-ayufan-drm-rockchip-add-support-for-modeline-32MHz-e-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0019-rk3399-rp64-pcie-Reimplement-rockchip-PCIe-bus-scan-delay.patch
+		-> 0019-rk3399-rp64-pcie-Reimplement-rockchip-PCIe-bus-scan-delay-${PV}.patch
+	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0020-arm64-dts-rockchip-setup-USB-type-c-port-as-dual-data-role.patch
+		-> 0020-arm64-dts-rockchip-setup-USB-type-c-port-as-dual-data-role-${PV}.patch
 	"
 S=${WORKDIR}/${MY_P}
 
