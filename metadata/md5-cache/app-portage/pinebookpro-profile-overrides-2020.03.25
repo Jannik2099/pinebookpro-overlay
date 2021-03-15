@@ -1,0 +1,8 @@
+DEFINED_PHASES=install prepare unpack
+DESCRIPTION=profile overrides for the Pinebook Pro
+EAPI=7
+HOMEPAGE=https://github.com/Jannik2099/pinebookpro-overlay/
+KEYWORDS=arm64
+LICENSE=GPL-3
+SLOT=0
+_md5_=fd2783faa36f301388b681854416f7f9

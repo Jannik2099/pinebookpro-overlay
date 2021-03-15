@@ -1,0 +1,14 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install postinst pretend setup unpack
+DESCRIPTION=Disables/enables the speaker on headphone plug/unplug
+EAPI=7
+HOMEPAGE=https://gitlab.manjaro.org/manjaro-arm/packages/community/pinebookpro-audio
+INHERIT=git-r3 linux-info
+IUSE=kernel_linux
+KEYWORDS=~arm64
+LICENSE=MIT
+PROPERTIES=live
+RDEPEND=media-sound/alsa-utils sys-power/acpid
+SLOT=0
+_eclasses_=git-r3	3e7ec3d6619213460c85e2aa48398441	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	d410501a125f99ffb560b0c523cd3d1e	linux-info	c90a203b1c14cfa77bd3e37a0e96c955
+_md5_=65b7958e98291367d99cf9bbb5791728

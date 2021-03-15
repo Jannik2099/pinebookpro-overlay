@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile configure install postinst
+DEPEND=sys-apps/dtc !build-tfa? ( >=sys-firmware/trusted-firmware-a-bin-2.2-r1 ) build-tfa? ( >=sys-firmware/trusted-firmware-a-2.2-r1 )
+DESCRIPTION=U-boot
+EAPI=7
+HOMEPAGE=https://www.denx.de/wiki/U-Boot
+IUSE=build-tfa
+KEYWORDS=-* arm64
+LICENSE=GPL-2
+RDEPEND=sys-apps/dtc !build-tfa? ( >=sys-firmware/trusted-firmware-a-bin-2.2-r1 ) build-tfa? ( >=sys-firmware/trusted-firmware-a-2.2-r1 )
+SLOT=0
+SRC_URI=https://gitlab.denx.de/u-boot/u-boot/-/archive/v2020.07/u-boot-v2020.07.tar.gz -> u-boot-2020.07.tar.gz
+_md5_=cfeed0abcefa84abd646cf440f2c761f

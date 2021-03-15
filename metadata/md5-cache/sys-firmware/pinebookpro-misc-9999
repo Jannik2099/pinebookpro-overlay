@@ -1,0 +1,11 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=install postinst prepare unpack
+DESCRIPTION=Miscellaneous files and fixes for full Pinebook Pro functionality
+EAPI=7
+HOMEPAGE=https://gitlab.manjaro.org/manjaro-arm/packages/community/pinebookpro-post-install
+INHERIT=git-r3
+LICENSE=GPL-3
+PROPERTIES=live
+SLOT=0
+_eclasses_=git-r3	3e7ec3d6619213460c85e2aa48398441
+_md5_=c271c73a33ba4144db43d0d1f128b804
