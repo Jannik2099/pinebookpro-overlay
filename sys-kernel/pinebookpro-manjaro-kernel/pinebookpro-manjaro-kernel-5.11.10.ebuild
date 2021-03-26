@@ -1,4 +1,4 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2020-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,7 +7,7 @@ inherit kernel-build
 
 MY_P=linux-${PV%.*}
 GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 1 ))
-MANJARO_COMMIT="b2c73226b1eeb88fc66fbc987ac32b65b4efce08"
+MANJARO_COMMIT="6ba12337c73ecf0b01dbfe5582aac594843cf82d"
 GENTOO_CONFIG_VER=5.10.18
 
 DESCRIPTION="Linux kernel built with Gentoo patches"

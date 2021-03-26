@@ -1,11 +1,11 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
 ETYPE="sources"
 K_WANT_GENPATCHES="base extras experimental"
-K_GENPATCHES_VER="7"
-MANJARO_COMMIT="b2c73226b1eeb88fc66fbc987ac32b65b4efce08"
+K_GENPATCHES_VER="13"
+MANJARO_COMMIT="6ba12337c73ecf0b01dbfe5582aac594843cf82d"
 
 inherit kernel-2
 detect_version
