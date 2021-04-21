@@ -1,23 +1,22 @@
-# Copyright 2020-2021 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI="6"
+ETYPE="sources"
+K_WANT_GENPATCHES="base extras experimental"
+K_GENPATCHES_VER="19"
+MANJARO_COMMIT="b58a73f5d0523d18197ff3a67c40d7db607ec1e7"
 
-inherit kernel-build
+inherit kernel-2
+detect_version
+detect_arch
 
-MY_P=linux-${PV%.*}
-GENPATCHES_P=genpatches-${PV%.*}-$(( ${PV##*.} + 1 ))
-MANJARO_COMMIT="6ba12337c73ecf0b01dbfe5582aac594843cf82d"
-GENTOO_CONFIG_VER=5.10.18
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
+HOMEPAGE="https://dev.gentoo.org/~mpagano/genpatches"
+IUSE="experimental"
 
-DESCRIPTION="Linux kernel built with Gentoo patches"
-HOMEPAGE="https://www.kernel.org/"
-SRC_URI+=" https://cdn.kernel.org/pub/linux/kernel/v$(ver_cut 1).x/${MY_P}.tar.xz
-	https://dev.gentoo.org/~mpagano/dist/genpatches/${GENPATCHES_P}.base.tar.xz
-	https://dev.gentoo.org/~mpagano/dist/genpatches/${GENPATCHES_P}.extras.tar.xz
-	https://github.com/mgorny/gentoo-kernel-config/archive/v${GENTOO_CONFIG_VER}.tar.gz
-		-> gentoo-kernel-config-${GENTOO_CONFIG_VER}.tar.gz
-
+DESCRIPTION="Full sources including the Gentoo patchset for the ${KV_MAJOR}.${KV_MINOR} kernel tree"
+SRC_URI="${KERNEL_URI} ${GENPATCHES_URI} ${ARCH_URI}
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/config
 		-> kernel-aarch64-manjaro.config-${PV}
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0009-nuumio-panfrost-Silence-Panfrost-gem-shrinker-loggin.patch
@@ -55,35 +54,22 @@ SRC_URI+=" https://cdn.kernel.org/pub/linux/kernel/v$(ver_cut 1).x/${MY_P}.tar.x
 		-> 0026-arm64-dts-rockchip-add-typec-extcon-hack-${PV}.patch
 	https://gitlab.manjaro.org/manjaro-arm/packages/core/linux/-/raw/${MANJARO_COMMIT}/0027-arm64-dts-rockchip-setup-USB-type-c-port-as-dual-data-role.patch
 		-> 0027-arm64-dts-rockchip-setup-USB-type-c-port-as-dual-data-role-${PV}.patch
-	"
-S=${WORKDIR}/${MY_P}
-
-LICENSE="GPL-2"
-KEYWORDS="-* ~arm64"
-IUSE="debug"
-
-RDEPEND="
-	!sys-kernel/gentoo-kernel-bin:${SLOT}"
-BDEPEND="
-	debug? ( dev-util/dwarves )"
-PDEPEND="
-	>=virtual/dist-kernel-${PV}"
+"
 
 src_prepare() {
-	PATCHES=(
-		# meh, genpatches have no directory
-		"${WORKDIR}"/*.patch
-		"${DISTDIR}"/*-${PV}.patch
-	)
-	default
+	eapply "${DISTDIR}"/*-${PV}.patch
+	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/.config" || die
+	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" "${S}/manjaro_config" || die
 
-	cp "${DISTDIR}/kernel-aarch64-manjaro.config-${PV}" .config || die
+	kernel-2_src_prepare
+}
 
-	local merge_configs=(
-		"${WORKDIR}/gentoo-kernel-config-${GENTOO_CONFIG_VER}"/base.config
-	)
-	use debug || merge_configs+=(
-		"${WORKDIR}/gentoo-kernel-config-${GENTOO_CONFIG_VER}"/no-debug.config
-	)
-	kernel-build_merge_configs "${merge_configs[@]}"
+pkg_postinst() {
+	kernel-2_pkg_postinst
+	einfo "For more info on this patchset, and how to report problems, see:"
+	einfo "${HOMEPAGE}"
+}
+
+pkg_postrm() {
+	kernel-2_pkg_postrm
 }
